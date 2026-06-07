@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Україна — Інформаційний портал</title>
+    <style>
+        :root {
+            --primary-color: #0057b7; 
+            --accent-color: #ffd700;  
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #003c82 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: var(--light-bg);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+
+        .toc-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            display: block;
+            padding: 4px 0;
+        }
+
+        .toc-list a:hover {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .toc-sublist {
+            list-style: none;
+            padding-left: 16px;
+            margin-top: 6px;
+        }
+
+        .toc-sublist li {
+            margin-bottom: 6px;
+        }
+
+        .toc-sublist a {
+            font-size: 0.88rem;
+            opacity: 0.8;
+        }
+
+        /* Контентна частина */
+        .content {
+            background: #ffffff;
+        }
+
+        .article-section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--accent-color);
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 20px 0 12px 0;
+            color: #34495e;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+            text-align: justify;
+            color: #34495e;
+        }
+
+        .content-block {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .image-card {
+            float: right;
+            width: 300px;
+            margin-left: 24px;
+            margin-bottom: 16px;
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(45deg, #e2e8f0, #cbd5e1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .image-caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 8px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        ul.data-list {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        ul.data-list li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            background: var(--light-bg);
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border-color);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптація під мобільні екрани */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 20px;
+            }
+            .image-card {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Україна</h1>
+        <p>Суверенна, незалежна, демократична, соціальна та правова держава в Східній Європі</p>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Зміст</h3>
+            <ul class="toc-list">
+                <li><a href="#intro">1. Вступ</a></li>
+                <li>
+                    <a href="#geography">2. Географія</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#relief">2.1 Рельєф</a></li>
+                        <li><a href="#climate">2.2 Клімат</a></li>
+                        <li><a href="#waters">2.3 Гідрографія</a></li>
+                    </ul>
+                </li>
+                <li><a href="#history">3. Історія</a></li>
+                <li><a href="#economy">4. Економіка</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            
+            <section id="intro" class="article-section">
+                <h2>Вступ</h2>
+                <p>Україна — держава у Східній Європі, що охоплює південно-західну частину Східноєвропейської рівнини. На півдні омивається Чорним та Азовським морями. Межує з багатьма країнами регіону і є найбільшою країною, чия територія повністю розташована в межах Європи.</p>
+                <p>Держава є унітарною республікою, де єдиним джерелом влади є народ. Вона складається з 24 областей, Автономної Республіки Крим та двох міст зі спеціальним статусом — Києва (столиці) та Севастополя.</p>
+            </section>
+
+            <section id="geography" class="article-section">
+                <h2>Географія та природа</h2>
+                
+                <div class="content-block">
+                    <div class="image-card">
+                        <div class="image-placeholder">Фізична карта України</div>
+                        <div class="image-caption">Загальний рельєф та географічне положення території України</div>
+                    </div>
+                    
+                    <h3 id="relief">Рельєф</h3>
+                    <p>Більша частина території України (близько 95%) належить до рівнинних просторів, які є частиною великої Східноєвропейської рівнини. Тут чергуються низовини (Поліська, Придніпровська, Причорноморська) та височини (Подільська, Придніпровська, Донецька).</p>
+                    <p>Гірські системи займають незначну площу і розташовані на околицях: Українські Карпати на заході (найвища точка — гора Говерла, 2061 м) та Кримські гори на крайньому півдні Кримського півострова.</p>
+                </div>
+
+                <div class="content-block">
+                    <div class="image-card">
+                        <div class="image-placeholder">Краєвиди та Клімат</div>
+                        <div class="image-caption">Помірний кліматичний пояс забезпечує чітку зміну пір року</div>
+                    </div>
+
+                    <h3 id="climate">Клімат</h3>
+                    <p>Клімат України переважно помірно-континентальний, з чітко вираженими порами року: тривалим теплим літом та помірно холодною зимою. На Південному березі Криму клімат має виражені субтропічні риси середземноморського типу.</p>
+                    <p>Розподіл опадів зменшується з північного заходу (де випадає найбільше опадів у Карпатах) у напрямку до південного сходу та степових зон.</p>
+                </div>
+
+                <h3 id="waters">Гідрографія (Річки та Озера)</h3>
+                <p>Територія країни вкрита густою річковою мережею. Більшість річок належать до басейнів Чорного та Азовського морів.</p>
+                <ul class="data-list">
+                    <li><strong>Дніпро</strong> — головна водна артерія країни, третя за довжиною річка в Європі.</li>
+                    <li><strong>Дністер</strong> — важлива річка західного регіону.</li>
+                    <li><strong>Південний Буг</strong> — найбільша річка, басейн якої повністю розташований в межах України.</li>
+                </ul>
+            </section>
+
+            <section id="history" class="article-section">
+                <h2>Історія</h2>
+                <p>Землі сучасної України мають надзвичайно багату історію, що сягає глибокої давнини. Тут розвивалися трипільська культура, скіфські племена, а згодом сформувався міцний союз слов'янських племен, який переріс у могутню середньовічну державу — Київську Русь.</p>
+                <p>У XX столітті після тривалих визвольних змагань та перебування у складі Радянського Союзу, 24 серпня 1991 року було проголошено незалежність України.</p>
+            </section>
+
+            <section id="economy" class="article-section">
+                <h2>Економіка</h2>
+                <p>Україна є індустріально-аграрною країною. Вона володіє потужним промисловим потенціалом, значними мінерально-сировинними ресурсами та унікальними чорноземами.</p>
+                <p>Останніми роками стрімко розвивається сфера інформаційних технологій (IT), яка стала одним із ключових драйверів експорту послуг.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p> 2026 Інформаційний сайт про Україну. Всі права захищені.</p>
+    </footer>
+
+</body>
+</html>
